@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 import { Buffer } from 'buffer';
 import { useState, useEffect} from 'react'
+
+import SearchArtist from './components/SearchArtists.js';
 
 var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
 var client_secret = '6c7ce6ee22a74948b9559eadedd30cc0'
@@ -32,6 +33,8 @@ function App() {
   }, [])
 
   async function searchArtist(artistName) {
+    
+
     if(!query) return;
 
     const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist`, {
@@ -39,24 +42,38 @@ function App() {
     })
 
     const data = await response.json()
-    console.log(data)
-    setArtists(data)
+    console.log(data.artists.items)
+    setArtists(data.artists.items)
+  }
+
+  function handleSubmit(e) {
+      e.preventDefault()
+
+      searchArtist()
   }
 
   return (
     <div className="App">
-      <h1>Buscar Artista no Spotify</h1>
+      <form onSubmit={handleSubmit}>
+        <h1>Buscar Artista no Spotify</h1>
   
-      <input
-        type="text"
-        placeholder="Digite o nome do artista"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={searchArtist} disabled={!accessToken}>
-        Buscar
-      </button>
-  
+        <input
+          type="text"
+          placeholder="Digite o nome do artista"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button type="submit" disabled={!accessToken}>
+          Buscar
+        </button>
+      </form>
+      <div className="searchArtists">
+        {artists && 
+          artists.map((artists, index) => (
+            <SearchArtist artistData={artists} key={index}/>
+          ))
+        }
+      </div>
     </div>
   );
 }
