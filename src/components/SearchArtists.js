@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./SearchArtists.module.css"
+import noProfileImg from '../images/noprofile.png'
 
 function SearchArtist({artistData}) {
 
@@ -7,7 +8,7 @@ function SearchArtist({artistData}) {
     const [followers] = useState(artistData.followers.total);
     const [popularity] = useState(artistData.popularity);
     const [spotifyLink] = useState(artistData.external_urls.spotify);
-    const [artistImage] = useState(artistData.images[1].url);
+    const [artistImage] = useState(artistData.images[2]?.url || noProfileImg);
 
     return(
         <div className={style.content}>

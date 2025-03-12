@@ -33,7 +33,7 @@ function App() {
   }, [])
 
   async function searchArtist(artistName) {
-    
+    setArtists('')
 
     if(!query) return;
 

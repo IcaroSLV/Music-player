@@ -13,6 +13,7 @@
     justify-content: center;
     gap: 1.3em;
     height: 170px;
+    width: 350px;
     padding: 0px 1.2em;
     background-color: rgb(39, 39, 39);
     color: white;
@@ -43,6 +44,8 @@
 .name {
     font-size: 2vw;
     font-weight: bolder;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .info {
