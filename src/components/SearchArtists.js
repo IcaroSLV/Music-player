@@ -7,7 +7,6 @@ function SearchArtist({artistData}) {
     const [name] = useState(artistData.name);
     const [followers] = useState(artistData.followers.total);
     const [popularity] = useState(artistData.popularity);
-    const [spotifyLink] = useState(artistData.external_urls.spotify);
     const [artistImage] = useState(artistData.images[2]?.url || noProfileImg);
 
     return(
