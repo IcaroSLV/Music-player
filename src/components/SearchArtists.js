@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./SearchArtists.module.css"
 import noProfileImg from '../images/noprofile.png'
 
@@ -13,7 +13,7 @@ function SearchArtist({artistData}) {
     return(
         <div className={style.content}>
             <div className={style.image}>
-                <img src={artistImage}></img>
+                <img alt={name} src={artistImage}></img>
             </div>
             <div className={style.desc}>
                 <p className={style.name}>{name}</p>
