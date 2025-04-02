@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  .App {
+    text-align: center;
+    margin: 1.2em 0px;
+  }
+  
+  .App form {
+    margin-bottom: 1.4em;
+  }
+  
+  .searchArtists {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.1em;
+  }

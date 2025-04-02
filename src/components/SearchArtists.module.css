@@ -54,7 +54,7 @@
     font-size: 12px;
 }
 
-.info p, .info span {
-    
+a {
+    text-decoration: none;
 }
 

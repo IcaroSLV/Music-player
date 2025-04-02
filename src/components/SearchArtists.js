@@ -1,6 +1,7 @@
 import { useState } from "react";
 import style from "./SearchArtists.module.css"
 import noProfileImg from '../images/noprofile.png'
+import {Link} from 'react-router-dom'
 
 function SearchArtist({artistData}) {
 
@@ -10,6 +11,7 @@ function SearchArtist({artistData}) {
     const [artistImage] = useState(artistData.images[2]?.url || noProfileImg);
 
     return(
+    <Link to={`/ArtistPage/${artistData.id}`}>
         <div className={style.content}>
             <div className={style.image}>
                 <img alt={name} src={artistImage}></img>
@@ -28,6 +30,7 @@ function SearchArtist({artistData}) {
                 </div>
             </div>
         </div>
+    </Link>
     )
 }
 
