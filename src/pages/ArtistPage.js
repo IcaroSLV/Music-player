@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
@@ -31,25 +31,23 @@ function ArtistPage() {
     getToken()
   }, [])
 
-  // PEGAR DADOS DO ARTISTA
-  async function getArtistId(id) {
+  const getArtistId = useCallback(async (id) => {
     const response = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
-    headers: { Authorization: `Bearer ${accessToken}`}   
-    })
-
-    const data = await response.json()
-    setArtist(data.items)
-  }
-
-  async function getAlbumId(id) {
+      headers: { Authorization: `Bearer ${accessToken}` }   
+    });
+  
+    const data = await response.json();
+    setArtist(data.items);
+  }, [accessToken]); // Dependência: accessToken
+  
+  const getAlbumId = useCallback(async (id) => {
     const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
-    headers: { Authorization: `Bearer ${accessToken}`}   
-    })
-
-    const data = await response.json()
-    setAlbums(data.items)
-  }
-
+      headers: { Authorization: `Bearer ${accessToken}` }   
+    });
+  
+    const data = await response.json();
+    setAlbums(data.items);
+  }, [accessToken]); // Dependência: accessToken
   
     // PEGAR DADOS DOS ALGUMS DO ARTISTA
     useEffect(() => {
