@@ -41,14 +41,6 @@ function ArtistPage() {
     setArtist(data.items)
   }
 
-    // PEGAR DADOS DOS ALGUMS DO ARTISTA
-  useEffect(() => {
-    if(accessToken && id) {
-        getAlbumId(id)
-        getArtistId(id)
-    }
-  }, [accessToken, id, getAlbumId, getArtistId])
-
   async function getAlbumId(id) {
     const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
     headers: { Authorization: `Bearer ${accessToken}`}   
@@ -57,6 +49,15 @@ function ArtistPage() {
     const data = await response.json()
     setAlbums(data.items)
   }
+
+  
+    // PEGAR DADOS DOS ALGUMS DO ARTISTA
+    useEffect(() => {
+      if(accessToken && id) {
+          getAlbumId(id)
+          getArtistId(id)
+      }
+    }, [accessToken, id, getAlbumId, getArtistId])
 
 
   // PEGAR DADOS DAS TRACKS DO ALBUM
