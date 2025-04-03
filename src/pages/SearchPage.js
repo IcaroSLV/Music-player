@@ -10,7 +10,7 @@ function SearchPage() {
 
   const [accessToken, setAccessToken] = useState('');
   const [query, setQuery] = useState();
-  const [artists, setArtists] = useState();
+  const [artists, setArtists] = useState([]);
 
   useEffect(() => {
     async function getToken() {
@@ -52,9 +52,8 @@ function SearchPage() {
 
   return (
     <div className={style.App}>
+      <h1>Buscar Artista no Spotify</h1>
       <form onSubmit={handleSubmit}>
-        <h1>Buscar Artista no Spotify</h1>
-  
         <input
           type="text"
           placeholder="Digite o nome do artista"
@@ -65,7 +64,7 @@ function SearchPage() {
           Buscar
         </button>
       </form>
-      <div className={style.searchArtists}>
+      <div className={`${style.searchArtists} ${artists.length > 0 ? style.showArtist : ''}`} >
         {artists && 
           artists.map((artists, index) => (
             <SearchArtist artistData={artists} key={index}/>

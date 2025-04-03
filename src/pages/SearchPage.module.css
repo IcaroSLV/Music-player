@@ -1,16 +1,79 @@
+@import url('../variavelCSS/variaveis.css');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
     border: 0;
   }
-  
-  .App {
-    text-align: center;
-    margin: 1.2em 0px;
+
+  html {
+    background-color: var(--preto-suave);
+    color: var(--cinza-texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
+  .App {
+    min-height: 100vh;
+    margin: 1em 0em;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 30px;
+    color: var(--verde-texto);
+    margin-bottom: .2em;
+  }
+
   .App form {
+    position: relative;
     margin-bottom: 1.4em;
+    display: flex;
+    width: 400px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .App input {
+    border: none;
+    font-size: 15px;
+    height: 30px;
+    width: 95%;
+    padding: 0.4em 6em 0.4em 1em;
+    border-radius: 5px;
+    background-color: var(--cinza-caixa);
+    position: relative;
+    color: var(--branco);
+  }
+  .App input:focus {
+    outline: none;
+    color: var(--branco);
+  }
+
+  .App button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 20px;
+    background-color: var(--verde-texto);
+    color: var(--branco);
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+
+  }
+  .App button:hover {
+    background-color: var(--verde-hover);
   }
   
   .searchArtists {
@@ -19,4 +82,21 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1.1em;
+  }
+
+  .showArtist {
+    animation: showArtist 0.5s forwards ease-in-out;
+  }
+
+  @keyframes showArtist {
+    0% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 100;
+    }
+    
   }
