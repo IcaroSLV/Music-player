@@ -74,6 +74,7 @@ function ArtistPage() {
   // CODIGO DA PÁGINA
     return(<div>
         <Link to='/'>Voltar</Link>
+        <div>{artist}</div>
         {albums && 
         albums.map((album) => (
          <div key={album.id} onClick={() => getAlbumTracks(album.id)}>{album.name}</div>   
