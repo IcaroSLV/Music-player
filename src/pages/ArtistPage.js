@@ -47,7 +47,7 @@ function ArtistPage() {
         getAlbumId(id)
         getArtistId(id)
     }
-  }, [accessToken, id])
+  }, [accessToken, id, getAlbumId, getArtistId])
 
   async function getAlbumId(id) {
     const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
