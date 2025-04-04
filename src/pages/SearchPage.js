@@ -1,8 +1,6 @@
 import style from "./SearchPage.module.css";
 import { useState, useEffect } from 'react'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SearchArtist from '../components/SearchArtists.js';
 
 var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
@@ -16,7 +14,6 @@ function SearchPage() {
   const limit = 9
   const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
-  const [inputValue, setInputValue] = useState()
 
   useEffect(() => {
 
