@@ -11,6 +11,7 @@ function SearchPage() {
   const [accessToken, setAccessToken] = useState('');
   const [query, setQuery] = useState();
   const [page, setPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState()
   const limit = 9
   const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
@@ -37,32 +38,33 @@ function SearchPage() {
     getToken()
   }, [])
 
-  async function searchArtist(artistName) {
-    setArtists('')
-
-    if (!query) return;
-
-    const offset = (page - 1) * limit;
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist&limit=${limit}&offset=${offset}`, {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    })
-
-    const data = await response.json()
-    console.log(data.artists)
-    setArtists(data.artists.items)
-    if (data?.artists.next) {
-      setHasNext(true);
-    }
-  }
-
   useEffect(() => {
-    searchArtist()
-  }, [page])
+    const searchArtist = async () => {
+      setArtists('')
+
+      if (!query) return;
+
+      const offset = (page - 1) * limit;
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist&limit=${limit}&offset=${offset}`, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+
+      const data = await response.json()
+      console.log(data.artists)
+      setArtists(data.artists.items)
+      if (data?.artists.next) {
+        setHasNext(true);
+      }
+    }
+
+    if (searchTerm && accessToken) {
+      searchArtist();
+    }
+  }, [page, searchTerm])
 
   function handleSubmit(e) {
     e.preventDefault()
-
-    searchArtist()
+    setSearchTerm(query)
   }
 
   function changePage(direction) {
@@ -88,10 +90,10 @@ function SearchPage() {
       {artists && (
         <div className={`${style.searchArtists} ${artists.length > 0 ? style.showArtist : ''}`} >
           <div className={style.artistList}>
-          { artists.map((artists, index) => (
+            {artists.map((artists, index) => (
               <SearchArtist artistData={artists} key={index} />
             ))
-          }
+            }
           </div>
           <div className={style.direction}>
             {page !== 1 && (
@@ -100,9 +102,11 @@ function SearchPage() {
               </div>
             )}
 
-            <form>
-              <input type="number" value={page} readOnly></input>
-            </form>
+            {searchTerm && (
+              <form>
+                <input type="number" value={page} readOnly></input>
+              </form>
+            )}
 
             {hasNext && (
               <div>
