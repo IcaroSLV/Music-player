@@ -39,6 +39,7 @@ function SearchPage() {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const searchArtist = async () => {
       setArtists('')
 
