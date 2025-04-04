@@ -60,11 +60,12 @@ function SearchPage() {
     if (searchTerm && accessToken) {
       searchArtist();
     }
-  }, [page, searchTerm])
+  }, [page, searchTerm, accessToken])
 
   function handleSubmit(e) {
     e.preventDefault()
     setSearchTerm(query)
+    setPage(1)
   }
 
   function changePage(direction) {
