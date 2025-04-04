@@ -1,5 +1,7 @@
 import style from "./SearchPage.module.css";
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchArtist from '../components/SearchArtists.js';
 
@@ -10,9 +12,16 @@ function SearchPage() {
 
   const [accessToken, setAccessToken] = useState('');
   const [query, setQuery] = useState();
+  const [page, setPage] = useState(1)
+  const limit = 9
+  const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
+  const [inputValue, setInputValue] = useState()
 
   useEffect(() => {
+
+    setHasNext(false)
+
     async function getToken() {
       const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
@@ -21,10 +30,11 @@ function SearchPage() {
           'Authorization': 'Basic ' + btoa(client_id + ":" + client_secret),
         },
         body: 'grant_type=client_credentials',
-        }) 
-        
-        const data = await response.json();
-        setAccessToken(data.access_token);
+      })
+
+      const data = await response.json();
+      setAccessToken(data.access_token);
+
     }
 
     getToken()
@@ -33,44 +43,79 @@ function SearchPage() {
   async function searchArtist(artistName) {
     setArtists('')
 
-    if(!query) return;
+    if (!query) return;
 
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist`, {
-    headers: { Authorization: `Bearer ${accessToken}`}   
+    const offset = (page - 1) * limit;
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist&limit=${limit}&offset=${offset}`, {
+      headers: { Authorization: `Bearer ${accessToken}` }
     })
 
     const data = await response.json()
-    console.log(data.artists.items)
+    console.log(data.artists)
     setArtists(data.artists.items)
+    if (data?.artists.next) {
+      setHasNext(true);
+    }
   }
 
-  function handleSubmit(e) {
-      e.preventDefault()
+  useEffect(() => {
+    searchArtist(query)
+  }, [page])
 
-      searchArtist()
+  function handleSubmit(e) {
+    e.preventDefault()
+
+    searchArtist()
+  }
+
+  function changePage(direction) {
+    setPage((prevPage) => direction === 'previous' ? prevPage - 1 : prevPage + 1);
   }
 
   return (
     <div className={style.App}>
-      <h1>Buscar Artista no Spotify</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Digite o nome do artista"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button type="submit" disabled={!accessToken}>
-          Buscar
-        </button>
-      </form>
-      <div className={`${style.searchArtists} ${artists.length > 0 ? style.showArtist : ''}`} >
-        {artists && 
-          artists.map((artists, index) => (
-            <SearchArtist artistData={artists} key={index}/>
-          ))
-        }
+      <div className={style.search}>
+        <h1>Buscar Artista</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Digite o nome do artista"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit" disabled={!accessToken}>
+            Buscar
+          </button>
+        </form>
       </div>
+      {artists && (
+        <div className={`${style.searchArtists} ${artists.length > 0 ? style.showArtist : ''}`} >
+          <div className={style.artistList}>
+          { artists.map((artists, index) => (
+              <SearchArtist artistData={artists} key={index} />
+            ))
+          }
+          </div>
+          <div className={style.direction}>
+            {page !== 1 && (
+              <div>
+                <button onClick={() => changePage('previous')}>&lt;</button>
+              </div>
+            )}
+
+            <form>
+              <input type="number" value={page} readOnly></input>
+            </form>
+
+            {hasNext && (
+              <div>
+                <button onClick={() => changePage('next')}>&gt;</button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
