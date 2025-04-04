@@ -56,7 +56,7 @@ function SearchPage() {
   }
 
   useEffect(() => {
-    searchArtist(query)
+    searchArtist()
   }, [page])
 
   function handleSubmit(e) {
