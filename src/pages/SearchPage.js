@@ -43,7 +43,7 @@ function SearchPage() {
     const searchArtist = async () => {
       setArtists('')
 
-      if (!query) return;
+      if (!searchTerm) return;
 
       const offset = (page - 1) * limit;
       const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=artist&limit=${limit}&offset=${offset}`, {
