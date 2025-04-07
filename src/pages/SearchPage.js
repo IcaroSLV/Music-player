@@ -46,7 +46,7 @@ function SearchPage() {
       if (!query) return;
 
       const offset = (page - 1) * limit;
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist&limit=${limit}&offset=${offset}`, {
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=artist&limit=${limit}&offset=${offset}`, {
         headers: { Authorization: `Bearer ${accessToken}` }
       })
 
