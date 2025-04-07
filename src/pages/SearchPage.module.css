@@ -20,7 +20,14 @@
   .App {
     min-height: 100vh;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
+  .search {
+    height: 130px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +44,6 @@
     position: relative;
     display: flex;
     width: 350px;
-    margin-bottom: 1.2em;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -82,7 +88,6 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 1.1em;
   }
 
   .searchArtists .artistList {
@@ -98,7 +103,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.6em;
-    height: 25px;
+    height: 60px;
   }
 
   .searchArtists .direction input {
@@ -151,3 +156,20 @@
     }
     
   }
+
+  @media (max-width: 1000px) {
+
+    .search h1 {
+      font-size: 25px;
+    }
+    .search form {
+      width: 270px;
+    }
+    .search input {
+      font-size: 13px;
+    }
+    .search button {
+      font-size: 12px;
+    }
+  }
+

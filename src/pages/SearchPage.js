@@ -12,7 +12,7 @@ function SearchPage() {
   const [query, setQuery] = useState();
   const [page, setPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState()
-  const limit = 9
+  const [limit] = useState(9)
   const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
 

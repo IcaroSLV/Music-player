@@ -12,8 +12,8 @@
     align-items: center;
     justify-content: center;
     gap: 1.3em;
-    height: 170px;
-    width: 350px;
+    height: 140px;
+    width: 320px;
     padding: 0px 1.2em;
     background-color: rgb(39, 39, 39);
     color: white;
@@ -28,8 +28,9 @@
 
 
 .image img{
-    height: 130px;
-    width: 130px;
+    height: 110px;
+    width: 110px;
+    border-radius: 5px;
     object-fit: cover;
     display: block;
 
@@ -38,11 +39,10 @@
 .desc {
     display: flex;
     flex-direction: column;
-    gap: 1.4em;
+    gap: 1em;
 }
 
 .name {
-    font-size: 2vw;
     font-weight: bolder;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -56,5 +56,43 @@
 
 a {
     text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+
+    .content {
+        width: 250px;
+        height: 110px;
+    }
+    .image img{
+        height: 90px;
+        width: 90px;
+    }
+    .info {
+        font-size: 10px;
+    }
+
+}
+@media (max-width: 640px) {
+    .content {
+        width: 210px;
+        height: 100px;
+    }
+    .image img{
+        height: 70px;
+        width: 70px;
+    }
+    .desc {
+        gap: 0.8em;
+    }
+    .info {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 430px) {
+    .content {
+        width: 80vw;
+    }
 }
 
