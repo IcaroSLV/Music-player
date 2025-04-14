@@ -1,7 +1,7 @@
 import style from "./SearchPage.module.css";
 import { useState, useEffect } from 'react'
 
-import SearchArtist from '../components/SearchArtists.js';
+import SearchArtist from '../components/SearchArtists';
 
 var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
 var client_secret = '6c7ce6ee22a74948b9559eadedd30cc0'
@@ -9,7 +9,7 @@ var client_secret = '6c7ce6ee22a74948b9559eadedd30cc0'
 function SearchPage() {
 
   const [accessToken, setAccessToken] = useState('');
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState('');
   const [page, setPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState()
   const limit = 9
