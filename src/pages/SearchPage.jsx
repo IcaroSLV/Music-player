@@ -1,12 +1,16 @@
 import style from "./SearchPage.module.css";
 import { useState, useEffect } from 'react'
 
+import { getAccessToken, searchArtists } from "../services/api";
+
 import SearchArtist from '../components/SearchArtists';
 
 var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
 var client_secret = '6c7ce6ee22a74948b9559eadedd30cc0'
 
 function SearchPage() {
+
+  // VARIAVEIS
 
   const [accessToken, setAccessToken] = useState('');
   const [query, setQuery] = useState('');
@@ -16,58 +20,50 @@ function SearchPage() {
   const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
 
+  // PEGAR TOKEN DE ACESSO
+
   useEffect(() => {
 
     setHasNext(false)
 
-    async function getToken() {
-      const response = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + btoa(client_id + ":" + client_secret),
-        },
-        body: 'grant_type=client_credentials',
-      })
-
-      const data = await response.json();
-      setAccessToken(data.access_token);
-
-    }
-
-    getToken()
+    getAccessToken()
+      .then(setAccessToken)
+      .catch((err) => console.log(`Erro ao buscar ${err}`))
   }, [])
 
+  // PESQUISAR ARTISTA PELA API
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const searchArtist = async () => {
-      setArtists('')
+    const fetchArtist = async () => {
 
       if (!searchTerm) return;
 
-      const offset = (page - 1) * limit;
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=artist&limit=${limit}&offset=${offset}`, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
+      setArtists('')
+      const offset = (page - 1) * limit
 
-      const data = await response.json()
-      console.log(data.artists)
-      setArtists(data.artists.items)
-      if (data?.artists.next) {
-        setHasNext(true);
+      try {
+        const data = await searchArtists(accessToken, searchTerm, limit, offset)
+        setArtists(data.items);
+        setHasNext(Boolean(data.items))
+      } catch (err) {
+        console.log(`Erro ao buscar artista: ${err}`)
       }
     }
 
-    if (searchTerm && accessToken) {
-      searchArtist();
-    }
-  }, [page, searchTerm, accessToken])
+      if (searchTerm && accessToken) {
+        fetchArtist();
+      }
+    }, [page, searchTerm, accessToken])
+
+  // PEGAR O NOME DO ARTISTA PELO FORM
 
   function handleSubmit(e) {
     e.preventDefault()
     setSearchTerm(query)
     setPage(1)
   }
+
+  // MUDAR DE PAGINA 
 
   function changePage(direction) {
     setPage((prevPage) => direction === 'previous' ? prevPage - 1 : prevPage + 1);
