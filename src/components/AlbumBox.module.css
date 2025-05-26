@@ -1,0 +1,45 @@
+@import url('../styles/variaveis.css');
+
+.AlbumBox{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: .3em .2em;
+    background-color: var(--cinza-caixa);
+    width: 180px;
+    border-radius: 5px;
+}
+
+.AlbumBox > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.AlbumBox img {
+    height: 6em;
+    border-radius: 5px;
+}
+
+.AlbumBox h1 {
+    padding-top: .3em;
+    font-size: .8em;
+}
+
+.albumInfo {
+    display: flex;
+    gap: 2em;
+    font-size: .7em;
+}
+
+.albumInfo > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.albumInfo > div > p {
+    color: white;
+}
