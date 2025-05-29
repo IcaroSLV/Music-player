@@ -1,14 +1,11 @@
 import { useParams } from "react-router-dom"
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import style from "./ArtistPage.module.css"
 
 import AlbumBox from "../components/AlbumBox";
 
-import { getAccessToken, getArtistById, getAlbumsByArtist, getTracksByAlbum } from "../services/api";
-
-var client_id = '6450da63fe2c47b78fdb7f60c96508b9'
-var client_secret = '6c7ce6ee22a74948b9559eadedd30cc0'
+import { getAccessToken, getArtistById, getAlbumsByArtist} from "../services/api";
 
 function ArtistPage() {
   const { id } = useParams();
