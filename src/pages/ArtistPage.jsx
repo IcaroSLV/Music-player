@@ -16,9 +16,8 @@ function ArtistPage() {
   const [artist, setArtist] = useState('')
   const [albums, setAlbums] = useState('')
   const [tracks, setTracks] = useState('')
-  const [followers, setFollowers] = useState('')
-  const [popularity, setPopularity] = useState('')
   const [imagesArtist, setImageArtist] = useState('')
+  const [selectedAlbumId, setSelectedAlbuId] = useState('')
 
 
   // PEGAR O TOKEN DE ACESSO
@@ -28,6 +27,8 @@ function ArtistPage() {
       .catch((err) => console.log(`Erro ao obter token: ${err}`))
   }, [])
 
+
+  // PEGAR INFORMAÇÕES DO ARTISTA/ALBUMS COM API
   useEffect(() => {
     async function fetchArtistAndAlbums() {
 
@@ -41,20 +42,15 @@ function ArtistPage() {
 
         setArtist(artistData);
         setAlbums(albumData)
-        setFollowers(artistData.followers.total)
-        setPopularity(artistData.popularity)
         setImageArtist(artistData.images[0].url)
-
         
-
-
       } catch (err) {
         console.log(`Erro ao buscar Artista ou Album: ${err}`)
       }
     }
-
     fetchArtistAndAlbums();
   }, [accessToken, id])
+
 
   // PEGAR DADOS DAS TRACKS DO ALBUM
   async function getAlbumTracks(id) {
@@ -64,10 +60,11 @@ function ArtistPage() {
 
     const data = await response.json()
     setTracks(data.items)
-    console.log(data.items)
-    console.log(albums)
+    setSelectedAlbuId(id)
+    console.log(tracks, selectedAlbumId)
   }
 
+  
   return (
     <div className="">
 
@@ -83,11 +80,11 @@ function ArtistPage() {
           </div>
           <div>
             <p>Seguidores</p>
-            <span>{followers}</span>
+            {artist && <span>{artist.followers.total}</span>}
           </div>
           <div>
             <p>Popularidade</p>
-            <span>{popularity}</span>
+            {artist && <span>{artist.popularity}</span>}
           </div>
         </div>
       </div>
@@ -101,19 +98,14 @@ function ArtistPage() {
               total_tracks={albums.total_tracks}
               release_date={albums.release_date}
               name={albums.name}
+              tracks={selectedAlbumId === albums.id? tracks:[]}
+              isOpen={selectedAlbumId === albums.id}
               />
             </div>
           ))
         }
       </div>
       <br />
-      <div className="MusicsList">
-        {tracks &&
-          tracks.map((tracks, index) => (
-            <div key={index} className="Music">{tracks.name}</div>
-          ))}
-      </div>
-
     </div>)
 
 }

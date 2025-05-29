@@ -9,7 +9,6 @@ html {
 .info {
     display: flex;
     gap: 1.5em;
-
 }
 
 .info h1 {
@@ -42,22 +41,77 @@ html {
     overflow: auto;
     width: 60em;
     padding-bottom: .2em;
+    transform: rotateX(180deg);
 }
 
-.MusicsList {
-
+.AlbumsList>* {
+    transform: rotateX(180deg);
 }
+
+.MusicsList {}
 
 .AlbumsList::-webkit-scrollbar {
-  height: 8px;  
+    height: 8px;
 }
 
 .AlbumsList::-webkit-scrollbar-track {
-  background: var(--cinza-texto); /* cor do fundo da barra */
-  border-radius: 10px;
+    background: var(--cinza-texto);
+    /* cor do fundo da barra */
+    border-radius: 10px;
 }
 
 .AlbumsList::-webkit-scrollbar-thumb {
     background-color: var(--cinza-caixa);
     border-radius: 10px;
+}
+
+@media (max-width: 1070px) {
+    .AlbumsList {
+        width: 50em;
+    }
+}
+
+@media (max-width: 890px) {
+    .AlbumsList {
+        width: 40em;
+    }
+}
+
+@media (max-width: 700px) {
+    .AlbumsList {
+        width: 26em;
+        height: 30em;
+        flex-wrap: wrap;
+        transform: rotateX(0deg);
+    }
+
+    .AlbumsList>* {
+        transform: rotateX(0deg);
+    }
+}
+
+@media (max-width: 450px) {
+    .info {
+        align-items: center;
+    }
+
+    .info h1 {
+        font-size: 25px;
+    }
+
+    .info img {
+        height: 8em;
+    }
+
+    .desc div p {
+        font-size: 12px;
+    }
+
+    .desc div span {
+        font-size: 12px;
+    }
+
+    .AlbumsList {
+        width: 17em;
+    }
 }

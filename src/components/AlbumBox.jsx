@@ -1,6 +1,7 @@
 import style from "./AlbumBox.module.css"
 
-function AlbumBox({ album_type, image, total_tracks, release_date, name }) {
+function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {  
+
     return (
         <div className={style.AlbumBox}>
             <div>
@@ -17,7 +18,7 @@ function AlbumBox({ album_type, image, total_tracks, release_date, name }) {
                     <span>{total_tracks}</span>
                 </div>
             </div>
-
+            {isOpen &&(<div>Abriu</div>)}
         </div>
     )
 }
