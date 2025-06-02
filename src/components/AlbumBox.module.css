@@ -43,3 +43,10 @@
 .albumInfo > div > p {
     color: white;
 }
+
+.SongsList {
+    margin-top: 0.2em;
+    border-radius: 5px;
+    width: 20em;
+    background-color: var(--cinza-caixa);
+}

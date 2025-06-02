@@ -1,6 +1,7 @@
 import style from "./AlbumBox.module.css"
+import Songs from "./Songs"
 
-function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {  
+function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {
 
     return (
         <div className={style.AlbumBox}>
@@ -18,7 +19,16 @@ function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {
                     <span>{total_tracks}</span>
                 </div>
             </div>
-            {isOpen &&(<div>Abriu</div>)}
+            {isOpen && (
+                <div className={style.SongsList}>
+                    {tracks.map((song) => (
+                        <Songs
+                        key={song.id}
+                        name={song.name}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

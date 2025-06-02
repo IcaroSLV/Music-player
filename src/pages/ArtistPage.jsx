@@ -54,16 +54,15 @@ function ArtistPage() {
     const response = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks`, {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
-
     const data = await response.json()
     setTracks(data.items)
+    console.log(data.items)
     setSelectedAlbuId(id)
-    console.log(tracks, selectedAlbumId)
   }
 
   
   return (
-    <div className="">
+    <div className={style.ArtistPage}>
 
       <Link to='/'>Voltar</Link>
 
