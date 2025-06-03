@@ -4,18 +4,18 @@ import Songs from "./Songs"
 function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {
 
     return (
-        <div className={style.AlbumBox}>
+        <div className={style.albumBox}>
             <div>
                 <img alt="foto do album" src={image}></img>
                 <h1>{name}</h1>
             </div>
             <div className={style.albumInfo}>
                 <div>
-                    <p>Tipo</p>
-                    <span>{album_type}</span>
+                    <p>TIPO</p>
+                    <span>{album_type.toUpperCase()}</span>
                 </div>
                 <div>
-                    <p>Tracks</p>
+                    <p>TRACKS</p>
                     <span>{total_tracks}</span>
                 </div>
             </div>

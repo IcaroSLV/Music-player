@@ -78,7 +78,7 @@
 
 @media (max-width: 700px) {
     .AlbumsList {
-        width: 26em;
+        width: 25em;
         height: 30em;
         flex-wrap: wrap;
         transform: rotateX(0deg);
@@ -87,6 +87,11 @@
     .AlbumsList>* {
         transform: rotateX(0deg);
     }
+
+    .AlbumsList::-webkit-scrollbar {
+    width: 7px;
+}
+
 }
 
 @media (max-width: 450px) {
@@ -111,6 +116,7 @@
     }
 
     .AlbumsList {
-        width: 17em;
+        width: 18.5em;
     }
 }
+

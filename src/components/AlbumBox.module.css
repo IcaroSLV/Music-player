@@ -1,28 +1,30 @@
 @import url('../styles/variaveis.css');
 
-.AlbumBox{
+.albumBox{
     display: flex;
     flex-direction: column;
     gap: .5em;
     padding: .3em .2em;
-    background-color: var(--cinza-caixa);
+    background-color: #1E1E1E;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
     width: 180px;
     border-radius: 5px;
 }
 
-.AlbumBox > div {
+.albumBox > div {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.AlbumBox img {
+.albumBox img {
     height: 6em;
     border-radius: 5px;
 }
 
-.AlbumBox h1 {
+.albumBox h1 {
+    padding: .3em;
     padding-top: .3em;
     font-size: .8em;
 }
@@ -49,4 +51,70 @@
     border-radius: 5px;
     width: 20em;
     background-color: var(--cinza-caixa);
+}
+
+@media (max-width: 450px) {
+  .albumBox {
+    padding: 1rem;
+    border-radius: .6rem;
+    color: #fff;
+    background-color: var(--preto-suave);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 250px;
+    height: 110px;
+  }
+
+  .albumBox > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: .2rem;
+  }
+
+  .albumBox img {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+  .albumBox h1 {
+    font-size: 1rem;
+    margin: 0;
+    width: 80%;
+  }
+
+  .albumInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .albumInfo div p {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin: 0;
+  }
+
+  .albumInfo div span {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .SongsList {
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+  }
+
+  .SongsList > * {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #222;
+    color: #ccc;
+  }
+
+  .SongsList > *:last-child {
+    border-bottom: none;
+  }
 }
