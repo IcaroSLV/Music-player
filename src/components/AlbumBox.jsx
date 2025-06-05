@@ -4,7 +4,7 @@ import Songs from "./Songs"
 function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {
 
     return (
-        <div className={style.albumBox}>
+        <div className={`${style.albumBox} ${isOpen ? style.isOpen:''}`}>
             <div>
                 <img alt="foto do album" src={image}></img>
                 <h1>{name}</h1>
@@ -21,10 +21,11 @@ function AlbumBox({ album_type, image, total_tracks, name, tracks, isOpen }) {
             </div>
             {isOpen && (
                 <div className={style.SongsList}>
-                    {tracks.map((song) => (
+                    {tracks.map((song, index) => (
                         <Songs
                         key={song.id}
                         name={song.name}
+                        index={index}
                         />
                     ))}
                 </div>

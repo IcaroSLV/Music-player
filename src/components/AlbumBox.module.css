@@ -10,6 +10,9 @@
     width: 180px;
     border-radius: 5px;
 }
+.isOpen {
+  border: 1px solid rgba(255, 255, 255, 0.185);
+}
 
 .albumBox > div {
     display: flex;
@@ -47,21 +50,19 @@
 }
 
 .SongsList {
-    margin-top: 0.2em;
-    border-radius: 5px;
-    width: 20em;
-    background-color: var(--cinza-caixa);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 700px) {
   .albumBox {
-    padding: 1rem;
     border-radius: .6rem;
     color: #fff;
     background-color: var(--preto-suave);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 250px;
-    height: 110px;
+
   }
 
   .albumBox > div:first-child {

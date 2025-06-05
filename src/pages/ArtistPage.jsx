@@ -51,12 +51,6 @@ function ArtistPage() {
 
   // PEGAR DADOS DAS TRACKS DO ALBUM
   async function getAlbumTracks(id) {
-
-    if(selectedAlbumId === id) {
-      setSelectedAlbuId(null)
-      setTracks([])
-      return;
-    }
     
     const response = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks`, {
       headers: { Authorization: `Bearer ${accessToken}` }

@@ -78,7 +78,7 @@
 
 @media (max-width: 700px) {
     .AlbumsList {
-        width: 25em;
+        width: 35em;
         height: 30em;
         flex-wrap: wrap;
         transform: rotateX(0deg);
