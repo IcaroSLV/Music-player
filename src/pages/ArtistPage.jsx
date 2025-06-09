@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import style from "./ArtistPage.module.css"
+import noProfileImg from '../images/noprofile.png'
 
 import AlbumBox from "../components/AlbumBox";
 
@@ -65,11 +66,11 @@ function ArtistPage() {
   return (
     <div className={style.ArtistPage}>
 
-      <Link to='/'>Voltar</Link>
+      <Link to='/' state={{backName: artist.name}} className={style.backButton}>Voltar</Link>
 
       <div className={style.info}>
         <div>
-          <img alt="imagem do artista" src={imagesArtist}></img>
+          <img alt="imagem do artista" src={imagesArtist || noProfileImg}></img>
         </div>
         <div className={style.desc}>
           <div>
@@ -88,13 +89,14 @@ function ArtistPage() {
       <div className={style.AlbumsList}>
         {albums &&
           albums.map((albums) => (
-            <div key={albums.id} onClick={() => getAlbumTracks(albums.id)} className="Album">
+            <div key={albums.id} className={style.album}>
               <AlbumBox
               album_type={albums.album_type}
               image={albums.images[0].url}
               total_tracks={albums.total_tracks}
               release_date={albums.release_date}
               name={albums.name}
+              handleOpenSongList={() => getAlbumTracks(albums.id)}
               tracks={selectedAlbumId === albums.id? tracks:[]}
               isOpen={selectedAlbumId === albums.id}
               />

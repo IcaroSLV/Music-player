@@ -1,6 +1,6 @@
 @import url('../styles/variaveis.css');
 
-.albumBox{
+.albumBox {
     display: flex;
     flex-direction: column;
     gap: .5em;
@@ -9,8 +9,12 @@
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
     width: 180px;
     border-radius: 5px;
+    height: auto;
+    overflow: hidden;
 }
-.isOpen {
+
+.albumBox.isOpen {
+  height: auto;
   border: 1px solid rgba(255, 255, 255, 0.185);
 }
 
@@ -50,9 +54,14 @@
 }
 
 .SongsList {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    gap: .3em;
+    display: none;
+}
+
+.isOpen .SongsList {
+  display: block;
 }
 
 @media (max-width: 700px) {

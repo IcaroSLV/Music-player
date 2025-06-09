@@ -1,18 +1,22 @@
 import style from "./SearchPage.module.css";
 import { useState, useEffect } from 'react'
+import { useLocation } from "react-router-dom";
 
 import { getAccessToken, searchArtists } from "../services/api";
 
 import SearchArtist from '../components/SearchArtists';
 
 function SearchPage() {
+  
+  const location = useLocation();
+  const backName = location.state?.backName 
 
   // VARIAVEIS
 
   const [accessToken, setAccessToken] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(backName);
   const [page, setPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState()
+  const [searchTerm, setSearchTerm] = useState(backName)
   const limit = 9
   const [hasNext, setHasNext] = useState(false)
   const [artists, setArtists] = useState([]);
